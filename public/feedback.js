@@ -1,4 +1,3 @@
-import { styler, value, listen, pointer, spring } from "popmotion";
 
 document
   .querySelector(".request-complement")
