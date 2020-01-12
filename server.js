@@ -13,10 +13,23 @@ const complements = [
   "You've learned a lot of things, and that's pretty hard to do"
 ];
 
+const insults = [
+    "You are ignorant",
+    "That dress does not look nice on you",
+    "Have you forgotten about working out?",
+    "You can do easy things",
+    "You've gotten far in this course. You're really not that smart"
+  ];
+
 function getRandomComplement() {
   const randomIndex = Math.floor(Math.random() * complements.length);
   return complements[randomIndex];
 }
+
+function getRandomInsult() {
+    const randomIndex = Math.floor(Math.random() * insults.length);
+    return insults[randomIndex];
+  }
 
 const app = express();
 
@@ -32,7 +45,16 @@ app.get("/complement", function(req, res) {
     .end();
 });
 
-app.use("/static", express.static("./public"));
+app.get("/insult", function(req, res) {
+    res
+      .json({
+        complement: getRandomInsult()
+      })
+      .end();
+  });
 
-app.listen(3000);
+app.use("/public", express.static("./public"));
+
+const port = process.env.PORT || 3000;
+app.listen(port);
 console.log("listening on http://localhost:3000");
